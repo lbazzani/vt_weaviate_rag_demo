@@ -7,7 +7,7 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-weaviate_data
+weaviate_data/*
 data
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
