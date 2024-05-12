@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "weaviate-client": "^3.0.0-rc.1",
+    "weaviate-ts-client": "^2.1.1"
+  }
+}
