@@ -8,7 +8,7 @@ const client = await weaviate.connectToLocal({
     grpcHost: 'localhost',
     grpcPort: 50051,
     headers: {
-      'X-OpenAI-Api-Key': process.env.OPENAI_API_KEY || ''
+      'X-OpenAI-Api-Key': process.env.OPENAI_APIKEY || ''
     }
   }
 )
@@ -22,9 +22,10 @@ for await (let item of myCollection.iterator()) {
 */
 
 
-var result = await myCollection.query.nearText(['eventi catastrofici'],{
-    limit: 2,
+var result = await myCollection.query.nearText(['russia'],{
+    limit: 10,
     targetVector: 'title_country',
+    returnProperties: ['title', 'description'],
     returnMetadata: ['distance']
   })
   

@@ -8,22 +8,21 @@ const client = await weaviate.connectToLocal({
     grpcHost: 'localhost',
     grpcPort: 50051,
     headers: {
-      'X-OpenAI-Api-Key': process.env.OPENAI_API_KEY || ''
+      'X-OpenAI-Api-Key': process.env.OPENAI_APIKEY || ''
     }
   }
 )
 
 const myCollection = client.collections.get("News");
 
-const generatePrompt = `delle news`;
 
 
-const result = await myCollection.generate.nearText(['Ci sono stati eventi catastofici oggi?'],{
-  singlePrompt: 'Rispondi delineando il contesto {title} e {description}',
-  groupedTask: 'Raggruppa le news per argomento',
+const result = await myCollection.generate.nearText(['russia'],{
+  singlePrompt: 'Rispondi delineando il contesto partendo da {title} e {description}. Scrivi massimo 20 parole.',
+  groupedTask: 'Fai un sommario delle news per argomento',
 },{
   limit: 2,
-  returnProperties: ['title', 'description'],
+  returnProperties: ['title', 'description', 'domain', 'newsid' ],
 })
 
 console.log(JSON.stringify(result.objects, null, 2));

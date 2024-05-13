@@ -8,7 +8,7 @@ const client = await weaviate.connectToLocal({
     grpcHost: 'localhost',
     grpcPort: 50051,
     headers: {
-      'X-OpenAI-Api-Key': process.env.OPENAI_API_KEY || ''
+      'X-OpenAI-Api-Key': process.env.OPENAI_APIKEY || ''
     }
   }
 )
@@ -21,8 +21,17 @@ const newsCollection = await client.collections.create({
   name: 'News',
   properties: [
     {
+      name: 'newsid',
+      dataType: weaviate.configure.dataType.NUMBER,
+    },
+    {
+      name: 'domain',
+      dataType: weaviate.configure.dataType.TEXT,
+    },
+    {
       name: 'title',
       dataType: weaviate.configure.dataType.TEXT,
+      tokenization: 'word'
     },
     {
       name: 'description',
@@ -36,9 +45,10 @@ const newsCollection = await client.collections.create({
 
 const newsToInsert = news_data.data.map((news) => {
   return {
+    newsid: news.id,
     title: news.title,
     description: news.description,
-    tokenization: 'word'
+    domain: news.domain
   }
 })
 
