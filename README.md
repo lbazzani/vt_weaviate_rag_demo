@@ -37,4 +37,40 @@ docker-compose up -d
 ```
 Questo comando avvierà Weaviate in modalità "detached", che significa che il processo di Docker Compose sarà in background e il terminale sarà libero per altri comandi.
 
+## Installa le dipendenze
+```bash
+npm install
+```
+## Esempi
+Questi tre script JavaScript dimostrano diverse funzionalità di Weaviate per gestire e interrogare dati in un database di conoscenza vettoriale. Ogni script ha uno scopo specifico e insieme forniscono un esempio completo di come gestire una collezione di notizie, eseguire ricerche semantiche e generare risposte basate su testo. Vediamo dettagliatamente cosa fa ogni script e come lanciarli.
+
+### 01-CreateCollection.js
+Descrizione:
+Questo script inizia connettendosi a un'istanza locale di Weaviate e usa axios per ottenere dati di notizie da un endpoint esterno. Successivamente, cancella una collezione preesistente chiamata "News" se esiste, quindi crea una nuova collezione con specifiche proprietà come newsid, domain, title, e description. Ogni notizia recuperata dall'endpoint viene poi inserita nella collezione.
+
+Esegui il file usando Node.js:
+```bash
+node 01-CreateCollection.js
+```
+
+### 02-TestQuery.js
+Descrizione:
+Questo script si connette a Weaviate e recupera la collezione "News". Poi esegue una ricerca semantica utilizzando il metodo nearText per trovare notizie correlate a specifiche parole chiave, in questo caso "russia". I risultati vengono stampati con titoli, descrizioni e la distanza semantica dalle parole chiave di ricerca.
+
+Esegui il file con Node.js:
+```bash
+node 02-TestQuery.js
+```
+
+
+03-GenerativeSearch.js
+Descrizione:
+Questo script mostra come utilizzare la funzionalità generativa di Weaviate. Si connette al database, recupera la collezione "News", e poi esegue una ricerca generativa basata sul testo delle notizie. Utilizza la funzione generate.nearText per creare risposte sintetiche che sommarizzano o forniscono contesto su notizie relative alla parola chiave "russia", formattando le risposte in base a un prompt predefinito.
+
+Esegui il file con Node.js:
+```bash
+node 03-GenerativeSearch.js
+```
+
+
 
