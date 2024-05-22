@@ -23,10 +23,12 @@ const newsCollection = await client.collections.create({
     {
       name: 'newsid',
       dataType: weaviate.configure.dataType.NUMBER,
+      "moduleConfig": { "text2vec-openai": { "skip": true } }
     },
     {
       name: 'domain',
       dataType: weaviate.configure.dataType.TEXT,
+      "moduleConfig": { "text2vec-openai": { "skip": true } }
     },
     {
       name: 'title',

@@ -15,16 +15,10 @@ const client = await weaviate.connectToLocal({
 
 const myCollection = client.collections.get("News");
 
-/*
-for await (let item of myCollection.iterator()) {
-  console.log(item.uuid, item.properties);
-}
-*/
-
-
-var result = await myCollection.query.nearText(['russia'],{
-    limit: 10,
-    targetVector: 'title_country',
+// esempio client
+var result = await myCollection.query.nearText('corruzione',{
+    limit: 20,
+    targetVector: 'description',
     returnProperties: ['title', 'description'],
     returnMetadata: ['distance']
   })
@@ -32,5 +26,7 @@ var result = await myCollection.query.nearText(['russia'],{
   for (let object of result.objects) {
     console.log(object.properties.title + ' - ' + object.metadata?.distance);
 }
+
+
 
 
